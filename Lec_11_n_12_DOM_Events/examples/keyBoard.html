@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Event Handling Example</h1>
+    <div>
+        <div><span class="keypress"></span> Key is pressed</div>
+        <div>Shift is <span class="shift"> </span>pressed</div>
+
+    </div>
+
+    <input type="text">
+    <script>
+
+        const input = document.querySelector("input");
+        const keyPress = document.querySelector(".keypress");
+        const shiftPress = document.querySelector(".shift");
+
+        input.addEventListener("keypress", function (obj) {
+            // console.log("event obj", obj);
+            // // console.log("event obj", obj.key);
+            // keyPress.innerText = obj.key;
+            // shiftPress.innerText = obj.shiftKey == false ? "not " : "";
+            console.log("Keypress");
+        });
+
+        input.addEventListener("keydown", function () {
+            console.log("keydown");
+        })
+
+        input.addEventListener("keyup", function () {
+            console.log("keyup");
+        })
+
+        //key press= key down + key up
+    </script>
+</body>
+
+</html>

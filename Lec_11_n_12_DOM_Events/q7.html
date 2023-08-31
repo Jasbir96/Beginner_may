@@ -15,10 +15,12 @@
             <p>Task - 1</p>
             <button>delete</button>
         </li>
+
         <li>
             <p>Task - 2</p>
             <button>delete</button>
         </li>
+
         <li>
             <p>Task - 3</p>
             <button>delete</button>
@@ -29,8 +31,43 @@
         </li>
     </ul>
     <script>
-      // Q- Make remove all button work  and make individual delete btn work 
-      //   Solution:
+        // Q-1.  Make remove all button work  
+        //    
+        //   2. also make individual delete btn work 
+        //   Solution:
+        /***
+         * 1. select the element on which you want to add eventlistener
+         * 2. write the logic into the handler fn
+         * 
+         * **/
+
+        const removeAll = document.querySelector("#all");
+        const allItems = document.querySelector("ul");
+
+        const allBtns = document.querySelectorAll("ul button");
+        // 
+        removeAll.addEventListener("click", function () {
+            allItems.remove()
+        })
+
+
+        // for (let i = 0; i < allBtns.length; i++) {
+        //     allBtns[i].addEventListener("click", function () {
+        //         allBtns[i].parentNode.remove();
+        //     })
+        // }
+
+        allItems.addEventListener("click", function (e) {
+            // e.target -> a certain element is clicked;
+            const elem = e.target;
+            const name = elem.tagName;
+            console.log(name);
+            if (name=="BUTTON"){
+                elem.parentNode.remove();
+            }
+        })
+
+
 
 
 

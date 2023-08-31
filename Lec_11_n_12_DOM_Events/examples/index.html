@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            border: 1px solid gray;
+        }
+
+        .grand_parent {
+            background-color: lightblue;
+            height: 20rem;
+            width: 20rem;
+        }
+
+        .parent {
+            background-color: lightgreen;
+            height: 50%;
+            width: 50%;
+        }
+
+        .children {
+            background-color: lightpink;
+            height: 50%;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class=" box grand_parent">
+        Grand Parent
+        <div class=" box parent">
+            Parent
+            <div class=" box children">
+                children
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        const gp = document.querySelector(".grand_parent");
+
+        gp.addEventListener("click", function (event) {
+            // target-> element on which you event occurs
+            console.log("target", event.target);
+            // curentTarget -> element on which event Listener is added 
+            console.log("currentTarget", event.currentTarget);
+        })
+
+      
+    </script>
+
+</body>
+
+</html>
