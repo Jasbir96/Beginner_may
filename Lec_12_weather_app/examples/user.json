@@ -1,0 +1,41 @@
+{
+    "location": {
+        "name": "New Delhi",
+        "region": "Delhi",
+        "country": "India",
+        "lat": 28.6,
+        "lon": 77.2,
+        "tz_id": "Asia/Kolkata",
+        "localtime_epoch": 1693675421,
+        "localtime": "2023-09-02 22:53"
+    },
+    "current": {
+        "last_updated_epoch": 1693674900,
+        "last_updated": "2023-09-02 22:45",
+        "temp_c": 32.0,
+        "temp_f": 89.6,
+        "is_day": 0,
+        "condition": {
+            "text": "Mist",
+            "icon": "//cdn.weatherapi.com/weather/64x64/night/143.png",
+            "code": 1030
+        },
+        "wind_mph": 4.3,
+        "wind_kph": 6.8,
+        "wind_degree": 300,
+        "wind_dir": "WNW",
+        "pressure_mb": 1006.0,
+        "pressure_in": 29.71,
+        "precip_mm": 0.0,
+        "precip_in": 0.0,
+        "humidity": 56,
+        "cloud": 25,
+        "feelslike_c": 31.2,
+        "feelslike_f": 88.2,
+        "vis_km": 3.5,
+        "vis_miles": 2.0,
+        "uv": 1.0,
+        "gust_mph": 13.0,
+        "gust_kph": 20.9
+    }
+}

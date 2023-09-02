@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!--innerHTML : html present inside a give  node
+    , innerText : it also give you the text 
+    textContent  : it also give you the text 
+-->
+
+<body>
+    <h1>Example</h1>
+    <div>
+        <p class="Hello">first</p>
+        <p>second</p>
+        <p style="display: none;">third</p>
+    </div>
+    <script>
+        const div = document.querySelector("div");
+        console.log("InnerText", div.innerText)
+        console.log("textContent", div.textContent)
+    </script>
+</body>
+
+</html>
