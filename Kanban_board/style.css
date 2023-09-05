@@ -66,7 +66,8 @@ body {
     display: flex;
 }
 
-.add-btn,.remove-btn {
+.add-btn,
+.remove-btn {
     width: 50%;
     height: 100%;
     border: 1px solid gray;
@@ -79,7 +80,58 @@ body {
     font-size: 1.8rem;
 }
 
+.main-cont {
+    padding-top: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: flex;
+    justify-content: space-around;
+    /* if width is not enough for some elments 
+    then they will be moved to the subsequent rows */
+    flex-wrap: wrap;
+    row-gap: 2rem;
+}
 
+/* ticket */
+.ticket-cont {
+    height: 10rem;
+    width: 15rem;
+    background-color: aliceblue;
+    border: 1px solid gray;
+}
+
+/*modal container  */
+.modal-cont {
+    height: 25rem;
+    width: 40rem;
+    background-color: lightcoral;
+    position: fixed;
+    /* 25 % of visible width of browser window */
+    left: 25vw;
+    /* 25% of visible height of  */
+    top: 25vh;
+    display: flex;
+}
+
+.textarea-cont {
+    height: 100%;
+    width: 75%;
+}
+
+.priority-color-cont {
+    height: 100%;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.color_modal {
+    height: 15%;
+    width: 70%;
+}
 
 
 
