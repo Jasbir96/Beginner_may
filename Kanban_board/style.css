@@ -1,0 +1,94 @@
+/* presets  */
+
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+
+
+* {
+    box-sizing: border-box;
+}
+
+/* html{
+    font-size: 20px;
+} */
+
+/*tool box css  */
+.toolbox-cont {
+    height: 5rem;
+    background-color: black;
+    display: flex;
+    /* vertically center */
+    align-items: center;
+    /* just give space b/w flex element */
+    gap: 3rem;
+}
+
+.toolbox-priority-cont {
+    background-color: lightblue;
+    height: 3rem;
+    width: 15rem;
+    margin-left: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.color {
+    height: 60%;
+    width: 20%
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.green {
+    background-color: green;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.action-btn-cont {
+    background-color: lightblue;
+    height: 60%;
+    width: 10rem;
+    display: flex;
+}
+
+.add-btn,.remove-btn {
+    width: 50%;
+    height: 100%;
+    border: 1px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.largeicon {
+    font-size: 1.8rem;
+}
+
+
+
+
+
+
+/* 
+1rem : font size of html
+what is the usecase : you have relative unit whose scale
+can be controlled from a single point 
+percentages  :  (value/totalval)*100;
+
+100acres : 30% of that land 
+*/

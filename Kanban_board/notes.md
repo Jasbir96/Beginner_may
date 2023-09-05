@@ -13,6 +13,7 @@ We have to create frontend only digital  Kanban Board
 * Whole application : two section 
         *  toolbar section
         *  main section 
+        
 #### UI components with : (HTML & CSS)
  * Toolbar   
     * color picker 
