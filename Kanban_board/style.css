@@ -110,7 +110,9 @@ body {
     left: 25vw;
     /* 25% of visible height of  */
     top: 25vh;
+
     display: flex;
+    display: none;
 }
 
 .textarea-cont {
@@ -133,7 +135,9 @@ body {
     width: 70%;
 }
 
-
+.selected {
+    border: 5px solid yellow;
+}
 
 
 /* 

@@ -46,3 +46,6 @@ We have to create frontend only digital  Kanban Board
 * drag and drop
 * start date and deadline
 * delete button on a ticket
+* we have write this in place holder. other wise as an app it should be known to user
+* this modal should also disappear when th cursor is outside 
+model is visible 
