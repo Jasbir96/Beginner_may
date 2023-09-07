@@ -92,13 +92,43 @@ body {
     row-gap: 2rem;
 }
 
-/* ticket */
+/* ********ticket *********************/
 .ticket-cont {
     height: 10rem;
     width: 15rem;
     background-color: aliceblue;
     border: 1px solid gray;
+    position: relative;
 }
+
+.ticket-color {
+    height: 10%;
+
+}
+
+.ticket-id {
+    height: 10%;
+    font-weight: 600;
+    padding-left: 4px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+}
+
+.ticket-area {
+    height: 70%;
+    padding-left: 4px;
+    padding-right: 4px;
+    overflow: scroll;
+}
+
+.lock_icon {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+}
+
+
 
 /*modal container  */
 .modal-cont {
