@@ -2,11 +2,19 @@
 const modalContainer = document.querySelector(".modal-cont");
 const addBtn = document.querySelector(".add-btn");
 const colorModalArr = document.querySelectorAll(".color_modal");
+const priorityColorsArr = document.querySelectorAll(".toolbox-priority-cont .color");
+
 const textArea = document.querySelector(".textarea-cont")
 const mainContainer = document.querySelector("main");
+
+
+const deleteBtn = document.querySelector(".remove-btn");
+
+
 // variable 
 const uid = new ShortUniqueId({ length: 5 });
 const colorsArray = ["red", "blue", "green", "purple"];
+let deleteFlag = false;
 
 /*******************************HERE are app level handlers*************************************/
 // 0-1 add the event listener to add button so modal should appear 
@@ -31,6 +39,49 @@ for (let i = 0; i < colorModalArr.length; i++) {
     })
 }
 
+
+
+/********remove all the filter on db clicke***/
+
+for (let i = 0; i < priorityColorsArr.length; i++) {
+    let currentColorElem = priorityColorsArr[i];
+    currentColorElem.addEventListener("dblclick", function () {
+        console.log("dblclick");
+        for (let i = 0; i < priorityColorsArr.length; i++) {
+            // console.log(colorModalArr[i].classList);
+            priorityColorsArr[i].classList.remove("selected");
+        }
+        /********************ui********************/
+
+        showAllTickets();
+    })
+}
+
+
+/**************filtering logic on the tickets**********/
+for (let i = 0; i < priorityColorsArr.length; i++) {
+    let currentColorElem = priorityColorsArr[i];
+    currentColorElem.addEventListener("click", function (event) {
+        console.log("click")
+        /*******************UI*********************/
+        // registering the color
+        // remove the selected from everyone
+        for (let i = 0; i < priorityColorsArr.length; i++) {
+            // console.log(colorModalArr[i].classList);
+            priorityColorsArr[i].classList.remove("selected");
+        }
+        // add to that element thta was clicked
+        const targetColorElem = event.target;
+        // console.log("````````````````````");
+        // console.log(targetColorElem)
+        targetColorElem.classList.add("selected");
+        /********************ui********************/
+
+        const currentColor = colorsArray[i];
+        filterTickets(currentColor);
+    })
+}
+
 /******1-1 adding listeners to enable ticket creation logic***/
 textArea.addEventListener("keypress", function (event) {
 
@@ -52,11 +103,58 @@ textArea.addEventListener("keypress", function (event) {
 })
 
 
+deleteBtn.addEventListener("click", function () {
+    if (deleteFlag == false) {
+        deleteBtn.style.color = "red";
+        deleteFlag = true;
+    } else {
+        deleteBtn.style.color = "black";
+        deleteFlag = false;
+
+    }
+})
+
+
+
+
 
 
 
 
 /***********************here are helper functions***************************/
+
+function filterTickets(currentColor) {
+    console.log("element to be visible will be of color ", currentColor);
+    // 1. select all the latest tickets
+    const ticketsArr = mainContainer.querySelectorAll(".ticket-cont");
+
+    //  loop through all the tickets
+    for (let i = 0; i < ticketsArr.length; i++) {
+        const cTicket = ticketsArr[i];
+        console.log(cTicket);
+        let isPresent = cTicket.querySelector(`.${currentColor}`);
+        if (isPresent == null) {
+            cTicket.style.display = "none";
+        } else {
+            cTicket.style.display = "block";
+        }
+        // only make the ticket visible when the ticket color ==currentColor
+    }
+}
+
+function showAllTickets() {
+    // 1. select all the latest tickets
+    const ticketsArr = mainContainer.querySelectorAll(".ticket-cont");
+    //  loop through all the tickets
+    for (let i = 0; i < ticketsArr.length; i++) {
+        const cTicket = ticketsArr[i];
+        cTicket.style.display = "block";
+        // only make the ticket visible when the ticket color ==currentColor
+    }
+}
+
+
+
 function createTicket(taskColor, task) {
     /*************2-2 added the UI of ticket************/
     const id = uid.rnd();
@@ -82,8 +180,10 @@ function createTicket(taskColor, task) {
 
     /*******add the logic of osciallating color*/
     handleChangeColor(ticketColorElem);
-}
 
+    /***********add the logic ticket deleteion*****/
+    handeDelete(ticketContainer)
+}
 // 2-3-2: function that add listener to the lock and unlock of the newly created button   
 function handlelockButton(lockButton, ticketArea) {
     lockButton.addEventListener("click", function () {
@@ -105,7 +205,6 @@ function handlelockButton(lockButton, ticketArea) {
         }
     })
 }
-
 // 2-3-3 
 function handleChangeColor(ticketColorElem) {
     // on the ticket we just need to change the colors 
@@ -124,4 +223,21 @@ function handleChangeColor(ticketColorElem) {
         ticketColorElem.classList.add(nextColor);
     })
 
+}
+
+function handeDelete(ticketContainer) {
+    ticketContainer.addEventListener("click", function () {
+        if (deleteFlag == true) {
+            // let message = prompt("Want to delete");
+            // message = message.toLowerCase();
+            // if (message == "yes") {
+            //     ticketContainer.remove();
+            // }
+            let res = confirm("do you want to delete it");
+            if (res) {
+                ticketContainer.remove();
+            }
+
+        }
+    })
 }
