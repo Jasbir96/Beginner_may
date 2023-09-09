@@ -1,3 +1,12 @@
+:root {
+    --red: #ff6b6b;
+    --blue: #54a0ff;
+    --green: #1dd1a1;
+    --purple: #5f27cd;
+    --modal-bg: #222f3e;
+    --white: white;
+}
+
 /* presets  */
 
 html,
@@ -20,7 +29,7 @@ body {
 /*tool box css  */
 .toolbox-cont {
     height: 5rem;
-    background-color: black;
+    background-color: var(--modal-bg);
     display: flex;
     /* vertically center */
     align-items: center;
@@ -44,19 +53,19 @@ body {
 }
 
 .red {
-    background-color: red;
+    background-color: var(--red);
 }
 
 .blue {
-    background-color: blue;
+    background-color: var(--blue);
 }
 
 .green {
-    background-color: green;
+    background-color: var(--green);
 }
 
 .purple {
-    background-color: purple;
+    background-color: var(--purple);
 }
 
 .action-btn-cont {
@@ -134,7 +143,7 @@ body {
 .modal-cont {
     height: 25rem;
     width: 40rem;
-    background-color: lightcoral;
+    background-color: var(--modal-bg);
     position: fixed;
     /* 25 % of visible width of browser window */
     left: 25vw;
@@ -148,6 +157,10 @@ body {
 .textarea-cont {
     height: 100%;
     width: 75%;
+    font-size:1.5rem;
+    font-family:sans-serif ;
+    padding:1rem;
+    resize: none;
 }
 
 .priority-color-cont {
@@ -166,7 +179,7 @@ body {
 }
 
 .selected {
-    border: 5px solid yellow;
+    border: 5px solid var(--white);
 }
 
 
