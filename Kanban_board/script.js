@@ -6,8 +6,6 @@ const priorityColorsArr = document.querySelectorAll(".toolbox-priority-cont .col
 
 const textArea = document.querySelector(".textarea-cont")
 const mainContainer = document.querySelector("main");
-
-
 const deleteBtn = document.querySelector(".remove-btn");
 
 
@@ -15,6 +13,22 @@ const deleteBtn = document.querySelector(".remove-btn");
 const uid = new ShortUniqueId({ length: 5 });
 const colorsArray = ["red", "blue", "green", "purple"];
 let deleteFlag = false;
+let ticketsArr = [];
+
+if (localStorage.getItem("ticketsArr") !== null) {
+    let strTicketArr = localStorage.getItem("ticketsArr");
+    ticketsArr = JSON.parse(strTicketArr);
+    // loop through each object 
+    //with the help of that object create a ticket
+    for (let i = 0; i < ticketsArr.length; i++) {
+        let ticketObj = ticketsArr[i];
+        createTicket(
+            ticketObj.color,
+            ticketObj.task,
+            ticketObj.id,
+            true);
+    }
+}
 
 /*******************************HERE are app level handlers*************************************/
 // 0-1 add the event listener to add button so modal should appear 
@@ -153,11 +167,18 @@ function showAllTickets() {
     }
 }
 
-
-
-function createTicket(taskColor, task) {
+// 1. create ticket-> 
+// store ->id ,color, data
+// 2. where you will -> 
+//update the color, update the data ,remove the ticket
+function createTicket(taskColor, task, pId, flag) {
     /*************2-2 added the UI of ticket************/
-    const id = uid.rnd();
+    let id;
+    if (flag == true) {
+        id = pId;
+    } else {
+        id = uid.rnd();
+    }
     /****we are constructing our ticket********/
     const ticketContainer = document.createElement("div");
     ticketContainer.setAttribute("class", "ticket-cont");
@@ -166,8 +187,6 @@ function createTicket(taskColor, task) {
             <div class="ticket-area">${task}</div>
              <i class="fa-solid fa-lock lock_icon"></i>
             `;
-
-
     /*******************adding ticket to my app********************/
     mainContainer.appendChild(ticketContainer);
 
@@ -175,17 +194,31 @@ function createTicket(taskColor, task) {
     const lockButton = ticketContainer.querySelector(".lock_icon");
     const ticketArea = ticketContainer.querySelector(".ticket-area");
     const ticketColorElem = ticketContainer.querySelector(".ticket-color");
+
+    /****************adding the ticket to local storage******************************/
+    if (flag == undefined) {
+        let ticketObj = {
+            id: id,
+            task: task,
+            color: taskColor
+        }
+
+        ticketsArr.push(ticketObj);
+        setLocalStorage();
+    }
+
+
     // 2-3-1: adding lock and unclock functionality  -> fn call
-    handlelockButton(lockButton, ticketArea);
+    handlelockButton(lockButton, ticketArea, id);
 
     /*******add the logic of osciallating color*/
-    handleChangeColor(ticketColorElem);
+    handleChangeColor(ticketColorElem, id);
 
     /***********add the logic ticket deleteion*****/
-    handeDelete(ticketContainer)
+    handeDelete(ticketContainer, id);
 }
 // 2-3-2: function that add listener to the lock and unlock of the newly created button   
-function handlelockButton(lockButton, ticketArea) {
+function handlelockButton(lockButton, ticketArea, id) {
     lockButton.addEventListener("click", function () {
         // Lock button : <i class="fa-solid fa-lock "></i>
         // Unlock button:     < i class="fa-solid fa-lock-open" ></ >
@@ -203,13 +236,27 @@ function handlelockButton(lockButton, ticketArea) {
             ticketArea.setAttribute("contenteditable", "false")
             // make my ticket task area : locked
         }
+
+        /*************************local storage***********************/
+        for (let i = 0; i < ticketsArr.length; i++) {
+            let ticketObj = ticketsArr[i];
+            if (ticketObj.id == id) {
+                // overriding 
+                let newTask = ticketArea.innerText;
+                ticketObj.task = newTask;
+                break;
+            }
+        }
+        setLocalStorage();
     })
 }
 // 2-3-3 
-function handleChangeColor(ticketColorElem) {
+function handleChangeColor(ticketColorElem, id) {
     // on the ticket we just need to change the colors 
 
     ticketColorElem.addEventListener("click", function () {
+        /****************change color on ui for given ticket*****************/
+
         let cColor = ticketColorElem.classList[1];
         // console.log("cColor", cColor);
         let cidx = colorsArray.indexOf(cColor);
@@ -221,11 +268,22 @@ function handleChangeColor(ticketColorElem) {
         let nextColor = colorsArray[nidx];
         ticketColorElem.classList.remove(cColor);
         ticketColorElem.classList.add(nextColor);
+        /*****************************local storage*************************************/
+        for (let i = 0; i < ticketsArr.length; i++) {
+            let ticketObj = ticketsArr[i];
+            if (ticketObj.id == id) {
+                ticketObj.color = nextColor;
+                break;
+            }
+        }
+        setLocalStorage();
+
+
     })
 
 }
 
-function handeDelete(ticketContainer) {
+function handeDelete(ticketContainer, id) {
     ticketContainer.addEventListener("click", function () {
         if (deleteFlag == true) {
             // let message = prompt("Want to delete");
@@ -236,8 +294,26 @@ function handeDelete(ticketContainer) {
             let res = confirm("do you want to delete it");
             if (res) {
                 ticketContainer.remove();
+                // i should also remove that ticket from the array
+
+                let ridx;
+                for (let i = 0; i < ticketsArr.length; i++) {
+                    let ticketObj = ticketsArr[i];
+                    if (ticketObj.id == id) {
+                        ridx = i;
+                    }
+                }
+                ticketsArr.splice(ridx, 1);
+                setLocalStorage();
             }
 
         }
     })
+}
+
+
+
+function setLocalStorage() {
+    const strTicketsArr = JSON.stringify(ticketsArr);
+    localStorage.setItem("ticketsArr", strTicketsArr);
 }
